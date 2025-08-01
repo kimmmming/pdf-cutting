@@ -15,8 +15,8 @@ import time
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-change-in-production'
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['OUTPUT_FOLDER'] = 'outputs'
+app.config['UPLOAD_FOLDER'] = '/tmp/uploads' if os.environ.get('VERCEL') else 'uploads'
+app.config['OUTPUT_FOLDER'] = '/tmp/outputs' if os.environ.get('VERCEL') else 'outputs'
 
 # 设置日志
 logging.basicConfig(level=logging.INFO)
@@ -64,9 +64,11 @@ def cleanup_old_files():
         
         time.sleep(3600)  # 每小时运行一次
 
-# 启动清理线程
-cleanup_thread = threading.Thread(target=cleanup_old_files, daemon=True)
-cleanup_thread.start()
+# 启动清理线程 - 在Vercel等无服务器环境中跳过
+import os
+if not os.environ.get('VERCEL'):
+    cleanup_thread = threading.Thread(target=cleanup_old_files, daemon=True)
+    cleanup_thread.start()
 
 @app.route('/')
 def index():
