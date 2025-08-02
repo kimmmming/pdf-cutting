@@ -9,10 +9,11 @@
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-dark" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">
-                <i class="fas fa-file-pdf me-2"></i>PDF章节分割工具
+            <a class="navbar-brand" href="{{ url_for('index') }}" style="font-weight: 600; font-size: 1.4rem;">
+                <i class="fas fa-magic me-2"></i>智能PDF章节分割工具
+                <small class="d-block" style="font-size: 0.7rem; opacity: 0.8;">AI-Powered PDF Chapter Splitter</small>
             </a>
         </div>
     </nav>
@@ -32,9 +33,21 @@
         {% block content %}{% endblock %}
     </div>
 
-    <footer class="bg-light text-center py-3 mt-5">
+    <footer class="text-center py-4 mt-5" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-top: 1px solid rgba(102, 126, 234, 0.1);">
         <div class="container">
-            <p class="text-muted mb-0">&copy; 2024 PDF章节分割工具. 支持智能章节检测和自定义分割模式.</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-muted mb-2">
+                        <i class="fas fa-heart text-danger me-1"></i>
+                        &copy; 2024 智能PDF章节分割工具 - 让文档处理更简单高效
+                    </p>
+                    <small class="text-muted">
+                        <i class="fas fa-shield-alt me-1"></i>支持智能章节检测 | 
+                        <i class="fas fa-cogs ms-2 me-1"></i>自定义分割模式 | 
+                        <i class="fas fa-download ms-2 me-1"></i>批量文件下载
+                    </small>
+                </div>
+            </div>
         </div>
     </footer>
 
